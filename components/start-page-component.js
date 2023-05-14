@@ -14,6 +14,9 @@
 //     },
 // ];
 
+import { EASY_PAGE, HARD_PAGE, MEDIUM_PAGE } from "../routes.js";
+import { goToPage } from "../script.js";
+
 
 export function renderStartPageComponent({ appEl }) {
 
@@ -52,6 +55,13 @@ export function renderStartPageComponent({ appEl }) {
                 for (var i = 0; i < level.length; i++) {
                     if (level[i].checked) {
                         console.log('Выбран ' + Number(i + 1) + ' уровень');
+                        if (i === 0) {
+                            goToPage(EASY_PAGE);
+                        } else if (i === 1) {
+                            goToPage(MEDIUM_PAGE);
+                        } else if (i === 2) {
+                            goToPage(HARD_PAGE);
+                        }
                     }
                 }
             }

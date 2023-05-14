@@ -89,12 +89,6 @@ body {
   color: #004980;
 }
 
-/* Disabled */
-.window__level input[type=radio]:disabled + label {
-  background: #efefef;
-  color: #666;
-}
-
 .game__button {
   width: 246px;
   height: 50px;
@@ -111,4 +105,8 @@ body {
   align-items: center;
   justify-content: center;
   color: #FFFFFF;
+}
+
+.game__button:hover {
+  color: #004980;
 }/*# sourceMappingURL=style.css.map */

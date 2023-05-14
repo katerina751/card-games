@@ -142,17 +142,6 @@ body {
     color:#004980;
 }
 
-/* Disabled */
-.window__level input[type=radio]:disabled+label {
-    background: #efefef;
-    color: #666;
-}
-
-
-// .-active {
-//     border-color: #0080C1;
-// }
-
 .game__button {
     width: 246px;
     height: 50px;
@@ -173,3 +162,7 @@ body {
     justify-content: center;
     color: #FFFFFF;
 }
+
+.game__button:hover {
+    color: #004980;
+    }
