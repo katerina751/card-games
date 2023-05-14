@@ -50,9 +50,15 @@ body {
 .window__level {
   margin-top: 48px;
   display: flex;
+  margin-right: 10px;
 }
 
-.window__level-button {
+.window__level input[type=radio] {
+  display: none;
+}
+
+.window__level label {
+  cursor: pointer;
   width: 98px;
   height: 98px;
   background: #FFFFFF;
@@ -72,8 +78,21 @@ body {
   color: #0080C1;
 }
 
-.-active {
-  border-color: #0080C1;
+/* Checked */
+.window__level input[type=radio]:checked + label {
+  background: #efefef;
+  color: #004980;
+}
+
+/* Hover */
+.window__level label:hover {
+  color: #004980;
+}
+
+/* Disabled */
+.window__level input[type=radio]:disabled + label {
+  background: #efefef;
+  color: #666;
 }
 
 .game__button {
