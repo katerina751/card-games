@@ -54,9 +54,60 @@ body {
 .window__level {
     margin-top: 48px;
     display: flex;
+    margin-right: 10px;
+}
+
+.window__level input[type=radio] {
+    display: none;
+    // width: 98px;
+    // height: 98px;
+
+    // background: #FFFFFF;
+    // border-radius: 12px;
+    // margin-left: 12px;
+    // margin-right: 12px;
+    // border-color: transparent;
+
+    // font-family: 'StratosSkyeng';
+    // font-style: normal;
+    // font-weight: 400;
+    // font-size: 64px;
+    // line-height: 72px;
+    // /* or 112% */
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+
+    // color: #0080C1;
 }
 
 .window__level-button {
+    // width: 98px;
+    // height: 98px;
+
+    // background: #FFFFFF;
+    // border-radius: 12px;
+    // margin-left: 12px;
+    // margin-right: 12px;
+    // border-color: transparent;
+
+    // font-family: 'StratosSkyeng';
+    // font-style: normal;
+    // font-weight: 400;
+    // font-size: 64px;
+    // line-height: 72px;
+    // /* or 112% */
+
+    // display: flex;
+    // align-items: center;
+    // justify-content: center;
+
+    // color: #0080C1;
+}
+
+.window__level label {
+    cursor: pointer;
     width: 98px;
     height: 98px;
 
@@ -64,7 +115,7 @@ body {
     border-radius: 12px;
     margin-left: 12px;
     margin-right: 12px;
-    border: 0;
+    border-color: transparent;
 
     font-family: 'StratosSkyeng';
     font-style: normal;
@@ -78,6 +129,17 @@ body {
     justify-content: center;
 
     color: #0080C1;
+}
+
+/* Checked */
+.window__level input[type=radio]:checked+label {
+    background:#efefef;
+    color: #004980;
+}
+
+/* Hover */
+.window__level label:hover {
+    color:#004980;
 }
 
 .game__button {
@@ -100,3 +162,7 @@ body {
     justify-content: center;
     color: #FFFFFF;
 }
+
+.game__button:hover {
+    color: #004980;
+    }
