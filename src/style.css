@@ -8,17 +8,13 @@
     padding-right: calc(50% - 600px);
 }
 
-
 @font-face {
-    font-family: "StratosSkyeng";
+    font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url("./assets/fonts/stratosskyengweb-regular.woff2") format("woff2");
+    src: url('../assets/fonts/stratosskyengweb-regular.woff2') format('woff2');
 }
-
-
-
 body {
     background: #004980;
     display: flex;
@@ -26,7 +22,7 @@ body {
 }
 
 .window {
-    background: #C2F5FF;
+    background: #c2f5ff;
     border-radius: 12px;
     height: 459px;
     margin-top: 158px;
@@ -38,7 +34,7 @@ body {
 }
 
 .window__title {
-    font-family: "StratosSkyeng";
+    font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -57,112 +53,60 @@ body {
     margin-right: 10px;
 }
 
-.window__level input[type=radio] {
+.window__level input[type='radio'] {
     display: none;
-    // width: 98px;
-    // height: 98px;
-
-    // background: #FFFFFF;
-    // border-radius: 12px;
-    // margin-left: 12px;
-    // margin-right: 12px;
-    // border-color: transparent;
-
-    // font-family: 'StratosSkyeng';
-    // font-style: normal;
-    // font-weight: 400;
-    // font-size: 64px;
-    // line-height: 72px;
-    // /* or 112% */
-
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-
-    // color: #0080C1;
-}
-
-.window__level-button {
-    // width: 98px;
-    // height: 98px;
-
-    // background: #FFFFFF;
-    // border-radius: 12px;
-    // margin-left: 12px;
-    // margin-right: 12px;
-    // border-color: transparent;
-
-    // font-family: 'StratosSkyeng';
-    // font-style: normal;
-    // font-weight: 400;
-    // font-size: 64px;
-    // line-height: 72px;
-    // /* or 112% */
-
-    // display: flex;
-    // align-items: center;
-    // justify-content: center;
-
-    // color: #0080C1;
 }
 
 .window__level label {
     cursor: pointer;
     width: 98px;
     height: 98px;
-
-    background: #FFFFFF;
+    background: #ffffff;
     border-radius: 12px;
     margin-left: 12px;
     margin-right: 12px;
     border-color: transparent;
-
     font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
     /* or 112% */
-
     display: flex;
     align-items: center;
     justify-content: center;
-
-    color: #0080C1;
+    color: #0080c1;
 }
 
 /* Checked */
-.window__level input[type=radio]:checked+label {
-    background:#efefef;
+.window__level input[type='radio']:checked + label {
+    background: #efefef;
     color: #004980;
 }
 
 /* Hover */
 .window__level label:hover {
-    color:#004980;
+    color: #004980;
 }
 
 .game__button {
     width: 246px;
     height: 50px;
     margin-top: 67px;
-    background: #7AC100;
+    background: #7ac100;
     border-radius: 12px;
     border: 0;
-
-
     font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FFFFFF;
+    color: #ffffff;
 }
 
 .game__button:hover {
     color: #004980;
-    }
+}
