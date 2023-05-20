@@ -9,12 +9,13 @@
 }
 
 @font-face {
-    font-family: 'StratosSkyeng';
+    font-family: stratos-skyeng;
     font-style: normal;
     font-weight: 400;
     font-display: swap;
-    src: url('../assets/fonts/stratosskyengweb-regular.woff2') format('woff2');
+    src: url('../assets/fonts/stratos-skyengweb-regular.woff2') format('woff2');
 }
+
 body {
     background: #004980;
     display: flex;
@@ -34,7 +35,6 @@ body {
 }
 
 .window__title {
-    font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -61,16 +61,16 @@ body {
     cursor: pointer;
     width: 98px;
     height: 98px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 12px;
     margin-left: 12px;
     margin-right: 12px;
     border-color: transparent;
-    font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
+
     /* or 112% */
     display: flex;
     align-items: center;
@@ -78,14 +78,14 @@ body {
     color: #0080c1;
 }
 
-/* Checked */
-.window__level input[type='radio']:checked + label {
-    background: #efefef;
+/* Hover */
+.window__level label:hover {
     color: #004980;
 }
 
-/* Hover */
-.window__level label:hover {
+/* Checked */
+.window__level input[type='radio']:checked + label {
+    background: #efefef;
     color: #004980;
 }
 
@@ -96,7 +96,6 @@ body {
     background: #7ac100;
     border-radius: 12px;
     border: 0;
-    font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
@@ -104,7 +103,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #ffffff;
+    color: #fff;
 }
 
 .game__button:hover {

@@ -4,7 +4,8 @@
     "description": "",
     "main": "routes.js",
     "scripts": {
-        "dev": "webpack --mode development --watch",        "format": "prettier --write ./card-games",
+        "dev": "webpack --mode development --watch",
+        "format": "prettier --write ./card-games",
         "lint:js": "eslint ./src/**/*.js",
         "lint:css": "stylelint ./src/**/*.css",
         "lint": "npm run lint:js && npm run lint:css",
@@ -21,7 +22,7 @@
         "eslint-plugin-prettier": "^4.2.1",
         "husky": "^8.0.3",
         "prettier": "^2.8.8",
-        "stylelint": "^14.8.2",
+        "stylelint": "^14.16.1",
         "stylelint-config-prettier": "^9.0.3",
         "stylelint-config-standard": "^25.0.0",
         "stylelint-prettier": "^2.0.0",
