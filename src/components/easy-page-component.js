@@ -1,3 +1,6 @@
+import { START_PAGE } from "../routes.js";
+import { goToPage } from "../script.js";
+
 export function renderEasyPageComponent({ appEl }) {
     const cards = [
         '6spades',
@@ -91,4 +94,9 @@ export function renderEasyPageComponent({ appEl }) {
         countDownElement.innerHTML = `${minutes}:${seconds}`;
         time++;
     }
+
+    const buttonRestartGame = document.querySelector('.restart__button');
+    buttonRestartGame.addEventListener('click', () => {
+        goToPage(START_PAGE);
+    });
 }
