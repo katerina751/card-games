@@ -1,4 +1,55 @@
 export function renderEasyPageComponent({ appEl }) {
+    const cards = [
+        '6spades',
+        '7spades',
+        '8spades',
+        '9spades',
+        '10spades',
+        'Jspades',
+        'Qspades',
+        'Kspades',
+        'Aspades',
+        '6clubs',
+        '7clubs',
+        '8clubs',
+        '9clubs',
+        '10clubs',
+        'Jclubs',
+        'Qclubs',
+        'Kclubs',
+        'Aclubs',
+        '6hearts',
+        '7hearts',
+        '8hearts',
+        '9hearts',
+        '10hearts',
+        'Jhearts',
+        'Qhearts',
+        'Khearts',
+        'Ahearts',
+        '6diamonds',
+        '7diamonds',
+        '8diamonds',
+        '9diamonds',
+        '10diamonds',
+        'Jdiamonds',
+        'Qdiamonds',
+        'Kdiamonds',
+        'Adiamonds',
+    ];
+
+    let easyCards = cards.sort(() => Math.random() - 0.5);
+    console.log(easyCards);
+
+    const cardHTML = easyCards
+        .map((card) => {
+            console.log(`img src="./${card}.svg"/`);
+            return `
+                <div class="game__card">
+                        <img src="./img/${card}.svg"/>
+                </div>`;
+        })
+        .join('');
     const easyWindowHtml = `
             <div class="game-header">
                 <div class="game-header__timer">
@@ -13,6 +64,7 @@ export function renderEasyPageComponent({ appEl }) {
                 </div>
             </div>
             <div class="game__field">
+                ${cardHTML}
                 <div class="game__card">
                     <img src="./img/shirt.svg" alt="рубашка" />
                 </div>
