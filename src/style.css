@@ -9,7 +9,7 @@
 }
 
 @font-face {
-    font-family: "StratosSkyeng";
+    font-family: StratosSkyeng;
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -20,6 +20,7 @@ body {
     background: #004980;
     display: flex;
     justify-content: center;
+    font-family: StratosSkyeng;
 }
 
 .window {
@@ -35,7 +36,6 @@ body {
 }
 
 .window__title {
-    font-family: "StratosSkyeng";
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -67,7 +67,6 @@ body {
     margin-left: 12px;
     margin-right: 12px;
     border-color: transparent;
-    font-family: "StratosSkyeng";
     font-style: normal;
     font-weight: 400;
     font-size: 64px;
@@ -98,7 +97,6 @@ body {
     background: #7ac100;
     border-radius: 12px;
     border: 0;
-    font-family: "StratosSkyeng";
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
