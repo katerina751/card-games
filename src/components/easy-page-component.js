@@ -38,19 +38,30 @@ export function renderEasyPageComponent({ appEl }) {
         'Adiamonds',
     ];
 
-    let easyCards = cards.sort(() => Math.random() - 0.5);
-    console.log(easyCards);
+    let gameCards = cards
+        .sort(() => Math.random() - 0.5)
+        .slice(-3)
+        .join(' ')
+        .concat(' ')
+        .repeat(2)
+        .slice(0, -1)
+        .split(' ')
+        .sort(() => Math.random() - 0.5);
+    console.log(gameCards);
 
-    const cardHTML = easyCards
+    const cardHTML = gameCards
         .map((card) => {
             console.log(`img src="./${card}.svg"/`);
             return `
                 <div class="game__card">
                         <img src="./img/${card}.svg"/>
+                </div>
+                <div class="game__card">
+                    <img src="./img/shirt.svg" alt="рубашка" />
                 </div>`;
         })
         .join('');
-    const easyWindowHtml = `
+    const windowHtml = `
             <div class="game-header">
                 <div class="game-header__timer">
                     <div class="game-header__timer_header">
@@ -65,12 +76,9 @@ export function renderEasyPageComponent({ appEl }) {
             </div>
             <div class="game__field">
                 ${cardHTML}
-                <div class="game__card">
-                    <img src="./img/shirt.svg" alt="рубашка" />
-                </div>
             </div>`;
 
-    appEl.innerHTML = easyWindowHtml;
+    appEl.innerHTML = windowHtml;
 
     let time = 0;
     const countDownElement = document.getElementById('countdown');
