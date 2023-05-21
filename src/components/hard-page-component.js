@@ -1,5 +1,5 @@
-import { START_PAGE } from "../routes.js";
-import { goToPage } from "../script.js";
+import { START_PAGE } from '../routes.js';
+import { goToPage } from '../script.js';
 
 export function renderHardPageComponent({ appEl }) {
     const cards = [
@@ -50,21 +50,17 @@ export function renderHardPageComponent({ appEl }) {
         .slice(0, -1)
         .split(' ')
         .sort(() => Math.random() - 0.5);
-
     console.log(gameCards);
 
     const cardHTML = gameCards
-        .map((card) => {
+        .map((card, index) => {
             console.log(`img src="./${card}.svg"/`);
             return `
-                <div class="game__card">
-                        <img src="./img/${card}.svg"/>
-                </div>
-                <div class="game__card">
-                    <img src="./img/shirt.svg" alt="рубашка" />
-                </div>`;
+                <img class="game__card" data-index=${index} src="./img/shirt.svg" alt="рубашка" />
+                `;
         })
         .join('');
+
     const windowHtml = `
             <div class="game-header">
                 <div class="game-header__timer">
@@ -100,4 +96,18 @@ export function renderHardPageComponent({ appEl }) {
     buttonRestartGame.addEventListener('click', () => {
         goToPage(START_PAGE);
     });
+
+    const cardOpeningUser = () => {
+        const buttonCardElements = document.querySelectorAll('.game__card');
+        for (let buttonCardElement of buttonCardElements) {
+            buttonCardElement.addEventListener('click', (event) => {
+                event.stopPropagation();
+                const index = buttonCardElement.dataset.index;
+                console.log(gameCards[index]);
+                buttonCardElement.src = `./img/${gameCards[index]}.svg`;
+            });
+        }
+    };
+
+    cardOpeningUser();
 }
