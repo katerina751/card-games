@@ -1,4 +1,3 @@
-
 // const levels = [
 //     {
 //         name: 1,
@@ -14,12 +13,10 @@
 //     },
 // ];
 
-import { EASY_PAGE, HARD_PAGE, MEDIUM_PAGE } from "../routes.js";
-import { goToPage } from "../script.js";
-
+import { EASY_PAGE, HARD_PAGE, MEDIUM_PAGE } from '../routes.js';
+import { goToPage } from '../script.js';
 
 export function renderStartPageComponent({ appEl }) {
-
     const startWindowHtml = `
         <div class="window center">
             <div class="window__title">Выбери сложность</div>
@@ -47,9 +44,9 @@ export function renderStartPageComponent({ appEl }) {
     // Выбираем сложность уровня
 
     function levelSelection() {
-        const buttonElement = document.getElementById("game__button")
+        const buttonElement = document.getElementById('game__button');
 
-        buttonElement.addEventListener("click", () => {
+        buttonElement.addEventListener('click', () => {
             function levels() {
                 let level = document.getElementsByName('radio');
                 for (var i = 0; i < level.length; i++) {
@@ -67,10 +64,8 @@ export function renderStartPageComponent({ appEl }) {
             }
 
             levels();
-        })
+        });
     }
 
-
     levelSelection();
-
-};
+}
