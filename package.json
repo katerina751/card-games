@@ -3,30 +3,43 @@
     "version": "1.0.0",
     "description": "",
     "main": "routes.js",
+    "styles": [
+        "src/styles.css"
+    ],
     "scripts": {
         "dev": "webpack --mode development --watch",
         "format": "prettier --write ./card-games",
         "lint:js": "eslint ./src/**/*.js",
-        "lint:css": "stylelint ./src/**/*.css",
+        "lint:css": "stylelint ./src/*.css",
         "lint": "npm run lint:js && npm run lint:css",
-        "prepare": "husky install"
+        "prepare": "husky install",
+        "build": "cross-env NODE_ENV=production webpack",
+        "start": "webpack-dev-server --open"
     },
     "author": "",
     "license": "ISC",
     "dependencies": {
+        "cross-env": "^7.0.3",
         "lodash": "^4.17.21"
     },
     "devDependencies": {
+        "copy-webpack-plugin": "^11.0.0",
+        "css-loader": "^6.7.4",
+        "css-minimizer-webpack-plugin": "^5.0.0",
         "eslint": "^8.40.0",
         "eslint-config-prettier": "^8.8.0",
         "eslint-plugin-prettier": "^4.2.1",
+        "html-webpack-plugin": "^5.5.1",
         "husky": "^8.0.3",
+        "mini-css-extract-plugin": "^2.7.6",
         "prettier": "^2.8.8",
+        "style-loader": "^3.3.3",
         "stylelint": "^14.16.1",
         "stylelint-config-prettier": "^9.0.3",
         "stylelint-config-standard": "^25.0.0",
         "stylelint-prettier": "^2.0.0",
         "webpack": "^5.83.1",
-        "webpack-cli": "^5.1.1"
+        "webpack-cli": "^5.1.1",
+        "webpack-dev-server": "^4.15.0"
     }
 }

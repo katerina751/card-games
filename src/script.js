@@ -10,6 +10,7 @@ import {
     HARD_PAGE, //легкий уровеень
 } from './routes.js';
 
+
 export let page = null;
 
 /**
