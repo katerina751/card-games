@@ -52,11 +52,65 @@ export function renderHardPageComponent({ appEl }) {
         .sort(() => Math.random() - 0.5);
     console.log(gameCards);
 
+    const startGamePage = () => {
+        const cardHTML = gameCards
+            .map((card, index) => {
+                return `
+            <img class="game__card" data-index=${index} src="./img/shirt.svg" alt="рубашка" />
+            `;
+            })
+            .join('');
+
+        const windowHtml = `
+            <div class="game-header">
+                <div class="game-header__timer">
+                    <div class="game-header__timer_header">
+                        <p class="game-header__timer_header-item">min</p>
+                        <p class="game-header__timer_header-item">sec</p>
+                    </div>
+                    <div class="game-header__timer_time" id="countdown">00:00</div>
+                </div>
+                <div class="game-header__restart">
+                    <button class="restart__button">Начать заново</button>
+                </div>
+            </div>
+            <div class="game__field">
+                ${cardHTML}
+            </div>`;
+
+        appEl.innerHTML = windowHtml;
+
+        const cardOpeningUser = () => {
+            const buttonCardElements = document.querySelectorAll('.game__card');
+            for (let buttonCardElement of buttonCardElements) {
+                buttonCardElement.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const index = buttonCardElement.dataset.index;
+                    console.log(gameCards[index]);
+                    buttonCardElement.src = `./img/${gameCards[index]}.svg`;
+                });
+            }
+        };
+
+        let time = 0;
+        const countDownElement = document.getElementById('countdown');
+        setInterval(updateCountdown, 1000);
+        function updateCountdown() {
+            let minutes = Math.floor(time / 60);
+            let seconds = time % 60;
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            countDownElement.innerHTML = `${minutes}:${seconds}`;
+            time++;
+        }
+
+        cardOpeningUser();
+    };
+
     const cardHTML = gameCards
         .map((card, index) => {
-            console.log(`img src="./${card}.svg"/`);
             return `
-                <img class="game__card" data-index=${index} src="./img/shirt.svg" alt="рубашка" />
+                <img class="game__card" data-index=${index} src="./img/${card}.svg" alt="рубашка" />
                 `;
         })
         .join('');
@@ -80,34 +134,10 @@ export function renderHardPageComponent({ appEl }) {
 
     appEl.innerHTML = windowHtml;
 
-    let time = 0;
-    const countDownElement = document.getElementById('countdown');
-    setInterval(updateCountdown, 1000);
-    function updateCountdown() {
-        let minutes = Math.floor(time / 60);
-        let seconds = time % 60;
-        minutes = minutes < 10 ? '0' + minutes : minutes;
-        seconds = seconds < 10 ? '0' + seconds : seconds;
-        countDownElement.innerHTML = `${minutes}:${seconds}`;
-        time++;
-    }
-
     const buttonRestartGame = document.querySelector('.restart__button');
     buttonRestartGame.addEventListener('click', () => {
         goToPage(START_PAGE);
     });
 
-    const cardOpeningUser = () => {
-        const buttonCardElements = document.querySelectorAll('.game__card');
-        for (let buttonCardElement of buttonCardElements) {
-            buttonCardElement.addEventListener('click', (event) => {
-                event.stopPropagation();
-                const index = buttonCardElement.dataset.index;
-                console.log(gameCards[index]);
-                buttonCardElement.src = `./img/${gameCards[index]}.svg`;
-            });
-        }
-    };
-
-    cardOpeningUser();
+    setTimeout(startGamePage, 5000);
 }
