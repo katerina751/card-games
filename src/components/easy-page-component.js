@@ -1,9 +1,8 @@
-import { END_PAGE, START_PAGE } from '../routes.js';
+import { START_PAGE } from '../routes.js';
 import { goToPage } from '../script.js';
 import { desk } from './desk.js';
 
 export function renderEasyPageComponent({ appEl }) {
-
     let gameCards = desk
         .sort(() => Math.random() - 0.5)
         .slice(-3)
