@@ -103,6 +103,7 @@ export function renderHardPageComponent({ appEl }) {
             countDownElement.innerHTML = `${minutes}:${seconds}`;
             time++;
         }
+        restartGame();
 
         cardOpeningUser();
     };
@@ -134,10 +135,14 @@ export function renderHardPageComponent({ appEl }) {
 
     appEl.innerHTML = windowHtml;
 
-    const buttonRestartGame = document.querySelector('.restart__button');
-    buttonRestartGame.addEventListener('click', () => {
-        goToPage(START_PAGE);
-    });
+    const restartGame = () => {
+        const buttonRestartGame = document.querySelector('.restart__button');
+        buttonRestartGame.addEventListener('click', () => {
+            goToPage(START_PAGE);
+        });
+    };
+
+    restartGame();
 
     setTimeout(startGamePage, 5000);
 }
