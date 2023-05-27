@@ -1,45 +1,8 @@
 import { END_PAGE, START_PAGE } from '../routes.js';
 import { goToPage } from '../script.js';
+import { desk } from './desk.js';
 
 export function renderEasyPageComponent({ appEl }) {
-    const desk = [
-        '6spades',
-        '7spades',
-        '8spades',
-        '9spades',
-        '10spades',
-        'Jspades',
-        'Qspades',
-        'Kspades',
-        'Aspades',
-        '6clubs',
-        '7clubs',
-        '8clubs',
-        '9clubs',
-        '10clubs',
-        'Jclubs',
-        'Qclubs',
-        'Kclubs',
-        'Aclubs',
-        '6hearts',
-        '7hearts',
-        '8hearts',
-        '9hearts',
-        '10hearts',
-        'Jhearts',
-        'Qhearts',
-        'Khearts',
-        'Ahearts',
-        '6diamonds',
-        '7diamonds',
-        '8diamonds',
-        '9diamonds',
-        '10diamonds',
-        'Jdiamonds',
-        'Qdiamonds',
-        'Kdiamonds',
-        'Adiamonds',
-    ];
 
     let gameCards = desk
         .sort(() => Math.random() - 0.5)
@@ -57,8 +20,8 @@ export function renderEasyPageComponent({ appEl }) {
             .map((card, index) => {
                 return `
                 <div class="memory-card" data-framework="${card}">
-                    <img class="game__card front-face" src="./img/${card}.svg" alt="React" />
-                    <img class="game__card back-face" data-index=${index} src="./img/shirt.svg" alt="Рубашка" />
+                    <img class="front-face" src="./img/${card}.svg" alt="React" />
+                    <img class="back-face" data-index=${index} src="./img/shirt.svg" alt="Рубашка" />
                 </div>`;
             })
             .join('');
@@ -109,6 +72,18 @@ export function renderEasyPageComponent({ appEl }) {
         function checkForMatch() {
             if (firstCard.dataset.framework === secondCard.dataset.framework) {
                 disableCards();
+                if (
+                    Array.from(document.querySelectorAll('.flip')).length ===
+                    gameCards.length
+                ) {
+                    setTimeout(() => {
+                        // goToPage(END_PAGE);
+                        alert('Вы победили!');
+                        goToPage(START_PAGE);
+                        resetBoard();
+                    }, 500);
+                }
+
                 return;
             }
 
@@ -128,7 +103,9 @@ export function renderEasyPageComponent({ appEl }) {
             setTimeout(() => {
                 firstCard.classList.remove('flip');
                 secondCard.classList.remove('flip');
-                goToPage(END_PAGE);
+                // goToPage(END_PAGE);
+                alert('Вы проиграли!');
+                goToPage(START_PAGE);
                 resetBoard();
             }, 500);
         }
@@ -143,7 +120,7 @@ export function renderEasyPageComponent({ appEl }) {
         // таймер игры
         let time = 0;
         const countDownElement = document.getElementById('countdown');
-        setInterval(updateCountdown, 5000);
+        setInterval(updateCountdown, 1000);
         function updateCountdown() {
             let minutes = Math.floor(time / 60);
             let seconds = time % 60;
@@ -192,5 +169,5 @@ export function renderEasyPageComponent({ appEl }) {
 
     restartGame();
 
-    setTimeout(startGamePage, 1000);
+    setTimeout(startGamePage, 3000);
 }

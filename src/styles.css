@@ -203,4 +203,32 @@ body {
 
 .front-face {
   transform: rotateY(180deg);
+}
+
+.icon-game {
+  margin-top: 32px;
+}
+
+.window__message {
+  font-size: 40px;
+  line-height: 48px;
+  color: #004980;
+}
+
+.window__timer {
+  font-size: 24px;
+  line-height: 32px;
+  color: #000000;
+  margin-top: 28px;
+}
+
+.window__time {
+  font-size: 64px;
+  line-height: 72px;
+  color: #000000;
+  margin-top: 10px;
+}
+
+.end {
+  margin-top: 40px;
 }/*# sourceMappingURL=styles.css.map */
