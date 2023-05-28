@@ -1,6 +1,7 @@
 * {
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
 
 .center {
@@ -19,6 +20,10 @@ body {
   font-family: "StratosSkyeng";
   font-style: normal;
   background: #004980;
+  max-width: 1024px;
+  max-height: 774px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .window {
@@ -164,9 +169,69 @@ body {
   margin-top: 30px;
 }
 
-.game__card {
+.game__card_start {
   width: 95px;
   height: 133px;
   background: #ffffff;
   border-radius: 4px;
-}/*# sourceMappingURL=style.css.map */
+}
+
+.memory-card {
+  background: #ffffff;
+  border-radius: 4px;
+  width: 95px;
+  height: 133px;
+  position: relative;
+  box-shadow: 1px 1px 0 rgba(0, 0, 0, 0.3);
+  transform-style: preserve-3d;
+  transition: transform 0.5s;
+}
+
+.memory-card.flip {
+  transform: rotateY(180deg);
+}
+
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform 0.2s;
+}
+
+.front-face,
+.back-face {
+  position: absolute;
+  background: #1c7ccc;
+  backface-visibility: hidden;
+  transform: scale(-1, 1);
+}
+
+.front-face {
+  transform: rotateY(180deg);
+}
+
+.icon-game {
+  margin-top: 32px;
+}
+
+.window__message {
+  font-size: 40px;
+  line-height: 48px;
+  color: #004980;
+}
+
+.window__timer {
+  font-size: 24px;
+  line-height: 32px;
+  color: #000000;
+  margin-top: 28px;
+}
+
+.window__time {
+  font-size: 64px;
+  line-height: 72px;
+  color: #000000;
+  margin-top: 10px;
+}
+
+.end {
+  margin-top: 40px;
+}/*# sourceMappingURL=styles.css.map */

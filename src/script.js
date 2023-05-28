@@ -1,4 +1,5 @@
 import { renderEasyPageComponent } from './components/easy-page-component.js';
+import { renderEndPageComponent } from './components/end-page-component.js';
 import { renderHardPageComponent } from './components/hard-page-component.js';
 import { renderMediumPageComponent } from './components/medium-page-component.js';
 import { renderStartPageComponent } from './components/start-page-component.js';
@@ -9,7 +10,6 @@ import {
     MEDIUM_PAGE, //легкий уровеень
     HARD_PAGE, //легкий уровеень
 } from './routes.js';
-
 
 export let page = null;
 
@@ -60,6 +60,12 @@ const renderApp = () => {
 
     if (page === HARD_PAGE) {
         return renderHardPageComponent({
+            appEl,
+        });
+    }
+
+    if (page === END_PAGE) {
+        return renderEndPageComponent({
             appEl,
         });
     }
