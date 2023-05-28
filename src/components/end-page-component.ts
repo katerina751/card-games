@@ -1,7 +1,7 @@
-import {START_PAGE } from '../routes.js';
-import { goToPage } from '../script.js';
+import { START_PAGE } from '../routes';
+import { goToPage } from '../script';
 
-export function renderEndPageComponent({ appEl }) {
+export function renderEndPageComponent({ appEl }: { appEl: HTMLElement }) {
     const endWindowHtml = `
     <div class="window center">
         <img class="icon-game" src="./img/lossing.svg" alt="lossing" />
@@ -17,7 +17,7 @@ export function renderEndPageComponent({ appEl }) {
 
     const restartGame = () => {
         const buttonRestartGame = document.querySelector('.game__button');
-        buttonRestartGame.addEventListener('click', () => {
+        buttonRestartGame!.addEventListener('click', () => {
             goToPage(START_PAGE);
         });
     };

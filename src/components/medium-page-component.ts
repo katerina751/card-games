@@ -1,11 +1,11 @@
-import { END_PAGE, START_PAGE } from '../routes.js';
-import { goToPage } from '../script.js';
-import { desk } from './desk.js';
+import { START_PAGE } from '../routes';
+import { goToPage } from '../script';
+import { desk } from './desk';
 
-export function renderHardPageComponent({ appEl }) {
+export function renderMediumPageComponent({ appEl }: { appEl: HTMLElement }) {
     let gameCards = desk
         .sort(() => Math.random() - 0.5)
-        .slice(-9)
+        .slice(-6)
         .join(' ')
         .concat(' ')
         .repeat(2)
@@ -49,13 +49,14 @@ export function renderHardPageComponent({ appEl }) {
         // сравнение карт
         let hasFlippedCard = false;
         let lockBoard = false;
-        let firstCard, secondCard;
+        let firstCard: HTMLElement | null = null;
+        let secondCard: HTMLElement | null = null;
 
-        function flipCard() {
+        function flipCard(this: HTMLElement | null) {
             if (lockBoard) return;
             if (this === firstCard) return;
 
-            this.classList.add('flip');
+            this!.classList.add('flip');
 
             if (!hasFlippedCard) {
                 hasFlippedCard = true;
@@ -69,7 +70,9 @@ export function renderHardPageComponent({ appEl }) {
         }
 
         function checkForMatch() {
-            if (firstCard.dataset.framework === secondCard.dataset.framework) {
+            if (
+                firstCard!.dataset.framework === secondCard!.dataset.framework
+            ) {
                 disableCards();
                 if (
                     Array.from(document.querySelectorAll('.flip')).length ===
@@ -90,8 +93,8 @@ export function renderHardPageComponent({ appEl }) {
         }
 
         function disableCards() {
-            firstCard.removeEventListener('click', flipCard);
-            secondCard.removeEventListener('click', flipCard);
+            firstCard!.removeEventListener('click', flipCard);
+            secondCard!.removeEventListener('click', flipCard);
 
             resetBoard();
         }
@@ -100,8 +103,8 @@ export function renderHardPageComponent({ appEl }) {
             lockBoard = true;
 
             setTimeout(() => {
-                firstCard.classList.remove('flip');
-                secondCard.classList.remove('flip');
+                firstCard!.classList.remove('flip');
+                secondCard!.classList.remove('flip');
                 // goToPage(END_PAGE);
                 alert('Вы проиграли!');
                 goToPage(START_PAGE);
@@ -118,11 +121,13 @@ export function renderHardPageComponent({ appEl }) {
 
         // таймер игры
         let time = 0;
-        const countDownElement = document.getElementById('countdown');
+        const countDownElement = document.getElementById(
+            'countdown'
+        ) as HTMLElement;
         setInterval(updateCountdown, 1000);
         function updateCountdown() {
-            let minutes = Math.floor(time / 60);
-            let seconds = time % 60;
+            let minutes: string | number = Math.floor(time / 60);
+            let seconds: string | number = time % 60;
             minutes = minutes < 10 ? '0' + minutes : minutes;
             seconds = seconds < 10 ? '0' + seconds : seconds;
             countDownElement.innerHTML = `${minutes}:${seconds}`;
@@ -161,12 +166,12 @@ export function renderHardPageComponent({ appEl }) {
 
     const restartGame = () => {
         const buttonRestartGame = document.querySelector('.restart__button');
-        buttonRestartGame.addEventListener('click', () => {
+        buttonRestartGame!.addEventListener('click', () => {
             goToPage(START_PAGE);
         });
     };
 
     restartGame();
 
-    setTimeout(startGamePage, 3000);
+    setTimeout(startGamePage, 5000);
 }
