@@ -1,8 +1,6 @@
-import { START_PAGE, END_PAGE } from '../routes';
+import { START_PAGE } from '../routes';
 import { goToPage } from '../script';
 import { desk } from './desk';
-import { renderEndPageComponent } from './end-page-component';
-import { renderStartPageComponent } from './start-page-component';
 
 export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
     let gameCards = desk
@@ -19,9 +17,8 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
     let isCurrentWindow = false;
     let winnerUser = false;
 
-    const startGamePage = () => {
-
-
+    // окно с открытыми рубашками через 5 секунд
+    function startGamePage () {
         const cardHTML = gameCards
             .map((card, index) => {
                 return `
@@ -48,28 +45,6 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
             <div class="game__field">
                 ${cardHTML}
             </div>
-            ${
-                isCurrentWindow
-                    ? `
-            <!-- модальное окно, которое появится после сбора всех пар -->
-            <div id="modal-overlay" class="modal-overlay">
-                <div class="window center">
-                    <img class="icon-game" src="${
-                        winnerUser ? './img/victory.svg' : './img/lossing.svg'
-                    }" alt="lossing" />
-                    <div class="window__message">"Вы "+${
-                        winnerUser ? 'победили' : 'проиграли'
-                    }+"!"</div>
-                    <p class="window__timer">Затраченное время</p>
-                    <div class="window__time">01.20</div>
-                    <div class="game-header__restart">
-                        <button class="game__button end">Начать заново</button>
-                    </div>
-                </div>
-            </div>
-            `
-                    : ``
-            }
             `;
 
         appEl.innerHTML = windowHtml;
@@ -165,13 +140,90 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
             time++;
         }
 
+        function modalOverlay() {
+            const timerResult = countDownElement.textContent;
+
+            const cardHTML = gameCards
+                .map((card, index) => {
+                    return `
+                    <img class="game__card_start" data-index=${index} src="./img/${card}.svg" alt="рубашка" />
+                    `;
+                })
+                .join('');
+
+            const windowHtml = `
+                <div class="game-header">
+                    <div class="game-header__timer">
+                        <div class="game-header__timer_header">
+                            <p class="game-header__timer_header-item">min</p>
+                            <p class="game-header__timer_header-item">sec</p>
+                        </div>
+                        <div class="game-header__timer_time" id="countdown">00:00</div>
+                    </div>
+                    <div class="game-header__restart">
+                        <button class="restart__button">Начать заново</button>
+                    </div>
+                </div>
+                <div class="game__field">
+                    ${cardHTML}
+                </div>
+                ${
+                    isCurrentWindow
+                        ? `
+                <!-- модальное окно, которое появится после сбора всех пар -->
+                <div id="modal-overlay" class="modal-overlay"></div>
+                
+                <div class="the-end">
+                    <img class="icon-game" src="${
+                        winnerUser ? './img/victory.svg' : './img/lossing.svg'
+                    }" alt="lossing" />
+                    <div class="window__message">Вы ${
+                        winnerUser ? 'победили' : 'проиграли'
+                    }!</div>
+                    <p class="window__timer">Затраченное время</p>
+                    <div class="window__time">${timerResult}</div>
+                    <div class="game-header__restart">
+                        <button class="game__button end">Начать заново</button>
+                    </div>
+                </div>
+                `
+                        : ``
+                }`;
+
+            appEl.innerHTML = windowHtml;
+
+            if (isCurrentWindow) {
+                const restartGame = () => {
+                    const buttonRestartGame =
+                        document.querySelector('.game__button');
+                    console.log(buttonRestartGame);
+
+                    buttonRestartGame!.addEventListener('click', () => {
+                        return goToPage(START_PAGE);
+                    });
+                };
+                restartGame();
+            } else {
+                const restartGame = () => {
+                    const buttonRestartGame =
+                        document.querySelector('.restart__button');
+                    console.log(buttonRestartGame);
+                    buttonRestartGame!.addEventListener('click', () => {
+                        return goToPage(START_PAGE);
+                    });
+                };
+                restartGame();
+            }
+        }
+
         restartGame();
     };
 
-    modalOverlay();
+    startGame();
     setTimeout(startGamePage, 5000);
 
-    function modalOverlay() {
+    // окно с закрытыми рубашками
+    function startGame() {
         const cardHTML = gameCards
             .map((card, index) => {
                 return `
@@ -196,63 +248,27 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
             <div class="game__field">
                 ${cardHTML}
             </div>
-            ${
-                isCurrentWindow
-                    ? `
-            <!-- модальное окно, которое появится после сбора всех пар -->
-            <div id="modal-overlay" class="modal-overlay">
-                <div class="window center">
-                    <img class="icon-game" src="${
-                        winnerUser ? './img/victory.svg' : './img/lossing.svg'
-                    }" alt="lossing" />
-                    <div class="window__message">Вы ${
-                        winnerUser ? 'победили' : 'проиграли'
-                    }!</div>
-                    <p class="window__timer">Затраченное время</p>
-                    <div class="window__time">01.20</div>
-                    <div class="game-header__restart">
-                        <button class="game__button end">Начать заново</button>
-                    </div>
-                </div>
-            </div>
-            `
-                    : ``
-            }`;
+            `;
 
         appEl.innerHTML = windowHtml;
 
-        if(isCurrentWindow) {
-            const restartGame = () => {
-                const buttonRestartGame = document.querySelector('.game__button');
-                console.log(buttonRestartGame);
-                
-                buttonRestartGame!.addEventListener('click', () => {
-                    goToPage(START_PAGE);
-                });
-            };
-            restartGame();
-        } else {
-            const restartGame = () => {
-                const buttonRestartGame = document.querySelector('.restart__button');
-                console.log(buttonRestartGame);
-                buttonRestartGame!.addEventListener('click', () => {
-                    goToPage(START_PAGE);
-                });
-            };
-            restartGame();
-        }
+        const restartGame = () => {
+            const buttonRestartGame =
+                document.querySelector('.restart__button');
+            console.log(buttonRestartGame);
+            buttonRestartGame!.addEventListener('click', () => {
+                return goToPage(START_PAGE);
+            });
+        };
 
+        restartGame();
     }
-
 
     const restartGame = () => {
         const buttonRestartGame = document.querySelector('.restart__button');
         console.log(buttonRestartGame);
         buttonRestartGame!.addEventListener('click', () => {
-            goToPage(START_PAGE);
+            return goToPage(START_PAGE);
         });
     };
-
-
-
 }

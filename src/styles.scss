@@ -4,11 +4,6 @@
     box-sizing: border-box;
 }
 
-.center {
-    padding-left: calc(50% - 600px);
-    padding-right: calc(50% - 600px);
-}
-
 @font-face {
     font-family: 'StratosSkyeng';
     font-style: normal;
@@ -33,13 +28,12 @@ body {
     background: #c2f5ff;
     border-radius: 12px;
     height: 459px;
-    margin-top: 158px;
-    margin-bottom: 158px;
+    top: 158px;
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 480px;
-    opacity: 1;
+    position: relative;
 }
 
 .window__title {
@@ -242,7 +236,7 @@ body {
 }
 
 .end {
-    margin-top: 40px;
+    margin-top: 48px;
 }
 
 /* настройки затемнения при выводе модального окна */
@@ -250,10 +244,25 @@ body {
     /* затемняем экран */
     background: rgba(0, 73, 128, 1);
     /* располагаем окно по центру экрана */
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     opacity: 0.9;
+}
+
+.the-end {
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    background: #c2f5ff;
+    top: -100px;
+    border-radius: 12px;
+    height: 459px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 480px;
+    position: relative;
 }

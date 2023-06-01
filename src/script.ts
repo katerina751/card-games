@@ -1,11 +1,9 @@
 import { renderEasyPageComponent } from './components/easy-page-component';
-import { renderEndPageComponent } from './components/end-page-component';
 import { renderHardPageComponent } from './components/hard-page-component';
 import { renderMediumPageComponent } from './components/medium-page-component';
 import { renderStartPageComponent } from './components/start-page-component';
 import {
     START_PAGE, //начальная страница
-    END_PAGE, //финальная страница
     EASY_PAGE, //легкий уровеень
     MEDIUM_PAGE, //легкий уровеень
     HARD_PAGE, //легкий уровеень
@@ -19,7 +17,7 @@ export let page: string;
  */
 export const goToPage = (newPage: string) => {
     if (
-        [START_PAGE, END_PAGE, EASY_PAGE, MEDIUM_PAGE, HARD_PAGE].includes(
+        [START_PAGE, EASY_PAGE, MEDIUM_PAGE, HARD_PAGE].includes(
             newPage
         )
     ) {
@@ -64,11 +62,6 @@ const renderApp = () => {
         });
     }
 
-    if (page === END_PAGE) {
-        return renderEndPageComponent({
-            appEl,
-        });
-    }
 };
 
 // вызов-функция
