@@ -1,22 +1,7 @@
-// const levels = [
-//     {
-//         name: 1,
-//         active: false,
-//     },
-//     {
-//         name: 2,
-//         active: false,
-//     },
-//     {
-//         name: 3,
-//         active: false,
-//     },
-// ];
+import { renderEasyPageComponent } from './game-page-component';
+export let n: number;
 
-import { EASY_PAGE, HARD_PAGE, MEDIUM_PAGE } from '../routes.js';
-import { goToPage } from '../script.js';
-
-export function renderStartPageComponent({ appEl }) {
+export function renderStartPageComponent({ appEl }: { appEl: HTMLElement }) {
     const startWindowHtml = `
         <div class="window center">
             <div class="window__title">Выбери сложность</div>
@@ -44,20 +29,25 @@ export function renderStartPageComponent({ appEl }) {
     // Выбираем сложность уровня
 
     function levelSelection() {
-        const buttonElement = document.getElementById('game__button');
+        const buttonElement = document.getElementById(
+            'game__button'
+        ) as HTMLElement;
 
-        buttonElement.addEventListener('click', () => {
+        buttonElement!.addEventListener('click', () => {
             function levels() {
                 let level = document.getElementsByName('radio');
                 for (var i = 0; i < level.length; i++) {
-                    if (level[i].checked) {
+                    if ((level[i] as HTMLInputElement).checked) {
                         console.log('Выбран ' + Number(i + 1) + ' уровень');
                         if (i === 0) {
-                            goToPage(EASY_PAGE);
+                            n = 3;
+                            renderEasyPageComponent({ appEl });
                         } else if (i === 1) {
-                            goToPage(MEDIUM_PAGE);
+                            n = 6;
+                            renderEasyPageComponent({ appEl });
                         } else if (i === 2) {
-                            goToPage(HARD_PAGE);
+                            n = 9;
+                            renderEasyPageComponent({ appEl });
                         }
                     }
                 }
