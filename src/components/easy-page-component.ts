@@ -1,6 +1,8 @@
-import { START_PAGE } from '../routes';
+import { START_PAGE, END_PAGE } from '../routes';
 import { goToPage } from '../script';
 import { desk } from './desk';
+import { renderEndPageComponent } from './end-page-component';
+import { renderStartPageComponent } from './start-page-component';
 
 export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
     let gameCards = desk
@@ -14,7 +16,12 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
         .sort(() => Math.random() - 0.5);
     console.log(gameCards);
 
+    let isCurrentWindow = false;
+    let winnerUser = false;
+
     const startGamePage = () => {
+
+
         const cardHTML = gameCards
             .map((card, index) => {
                 return `
@@ -40,7 +47,30 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
             </div>
             <div class="game__field">
                 ${cardHTML}
-            </div>`;
+            </div>
+            ${
+                isCurrentWindow
+                    ? `
+            <!-- модальное окно, которое появится после сбора всех пар -->
+            <div id="modal-overlay" class="modal-overlay">
+                <div class="window center">
+                    <img class="icon-game" src="${
+                        winnerUser ? './img/victory.svg' : './img/lossing.svg'
+                    }" alt="lossing" />
+                    <div class="window__message">"Вы "+${
+                        winnerUser ? 'победили' : 'проиграли'
+                    }+"!"</div>
+                    <p class="window__timer">Затраченное время</p>
+                    <div class="window__time">01.20</div>
+                    <div class="game-header__restart">
+                        <button class="game__button end">Начать заново</button>
+                    </div>
+                </div>
+            </div>
+            `
+                    : ``
+            }
+            `;
 
         appEl.innerHTML = windowHtml;
 
@@ -79,9 +109,10 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
                     gameCards.length
                 ) {
                     setTimeout(() => {
-                        // goToPage(END_PAGE);
-                        alert('Вы победили!');
-                        goToPage(START_PAGE);
+                        winnerUser = true;
+                        isCurrentWindow = !isCurrentWindow;
+                        console.log(isCurrentWindow);
+                        modalOverlay();
                         resetBoard();
                     }, 500);
                 }
@@ -105,9 +136,9 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
             setTimeout(() => {
                 firstCard!.classList.remove('flip');
                 secondCard!.classList.remove('flip');
-                // goToPage(END_PAGE);
-                alert('Вы проиграли!');
-                goToPage(START_PAGE);
+                isCurrentWindow = true;
+                winnerUser = false;
+                modalOverlay();
                 resetBoard();
             }, 500);
         }
@@ -137,15 +168,19 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
         restartGame();
     };
 
-    const cardHTML = gameCards
-        .map((card, index) => {
-            return `
+    modalOverlay();
+    setTimeout(startGamePage, 5000);
+
+    function modalOverlay() {
+        const cardHTML = gameCards
+            .map((card, index) => {
+                return `
                 <img class="game__card_start" data-index=${index} src="./img/${card}.svg" alt="рубашка" />
                 `;
-        })
-        .join('');
+            })
+            .join('');
 
-    const windowHtml = `
+        const windowHtml = `
             <div class="game-header">
                 <div class="game-header__timer">
                     <div class="game-header__timer_header">
@@ -160,18 +195,64 @@ export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
             </div>
             <div class="game__field">
                 ${cardHTML}
-            </div>`;
+            </div>
+            ${
+                isCurrentWindow
+                    ? `
+            <!-- модальное окно, которое появится после сбора всех пар -->
+            <div id="modal-overlay" class="modal-overlay">
+                <div class="window center">
+                    <img class="icon-game" src="${
+                        winnerUser ? './img/victory.svg' : './img/lossing.svg'
+                    }" alt="lossing" />
+                    <div class="window__message">Вы ${
+                        winnerUser ? 'победили' : 'проиграли'
+                    }!</div>
+                    <p class="window__timer">Затраченное время</p>
+                    <div class="window__time">01.20</div>
+                    <div class="game-header__restart">
+                        <button class="game__button end">Начать заново</button>
+                    </div>
+                </div>
+            </div>
+            `
+                    : ``
+            }`;
 
-    appEl.innerHTML = windowHtml;
+        appEl.innerHTML = windowHtml;
+
+        if(isCurrentWindow) {
+            const restartGame = () => {
+                const buttonRestartGame = document.querySelector('.game__button');
+                console.log(buttonRestartGame);
+                
+                buttonRestartGame!.addEventListener('click', () => {
+                    goToPage(START_PAGE);
+                });
+            };
+            restartGame();
+        } else {
+            const restartGame = () => {
+                const buttonRestartGame = document.querySelector('.restart__button');
+                console.log(buttonRestartGame);
+                buttonRestartGame!.addEventListener('click', () => {
+                    goToPage(START_PAGE);
+                });
+            };
+            restartGame();
+        }
+
+    }
+
 
     const restartGame = () => {
         const buttonRestartGame = document.querySelector('.restart__button');
+        console.log(buttonRestartGame);
         buttonRestartGame!.addEventListener('click', () => {
             goToPage(START_PAGE);
         });
     };
 
-    restartGame();
 
-    setTimeout(startGamePage, 5000);
+
 }

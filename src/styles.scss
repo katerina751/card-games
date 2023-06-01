@@ -39,6 +39,7 @@ body {
     flex-direction: column;
     align-items: center;
     max-width: 480px;
+    opacity: 1;
 }
 
 .window__title {
@@ -242,4 +243,17 @@ body {
 
 .end {
     margin-top: 40px;
+}
+
+/* настройки затемнения при выводе модального окна */
+.modal-overlay {
+    /* затемняем экран */
+    background: rgba(0, 73, 128, 1);
+    /* располагаем окно по центру экрана */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.9;
 }
