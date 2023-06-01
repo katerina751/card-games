@@ -1,6 +1,4 @@
 // Файл со списком страниц приложения
-export const EASY_PAGE = 'easy';
-export const MEDIUM_PAGE = 'medium';
-export const HARD_PAGE = 'hard';
+export const GAME_PAGE = 'game';
 export const START_PAGE = 'start';
 import "/src/styles.css";

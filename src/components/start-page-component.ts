@@ -1,5 +1,5 @@
-import { EASY_PAGE, HARD_PAGE, MEDIUM_PAGE } from '../routes';
-import { goToPage } from '../script';
+import { renderEasyPageComponent } from './game-page-component';
+export let n: number;
 
 export function renderStartPageComponent({ appEl }: { appEl: HTMLElement }) {
     const startWindowHtml = `
@@ -40,11 +40,14 @@ export function renderStartPageComponent({ appEl }: { appEl: HTMLElement }) {
                     if ((level[i] as HTMLInputElement).checked) {
                         console.log('Выбран ' + Number(i + 1) + ' уровень');
                         if (i === 0) {
-                            goToPage(EASY_PAGE);
+                            n = 3;
+                            renderEasyPageComponent({ appEl });
                         } else if (i === 1) {
-                            goToPage(MEDIUM_PAGE);
+                            n = 6;
+                            renderEasyPageComponent({ appEl });
                         } else if (i === 2) {
-                            goToPage(HARD_PAGE);
+                            n = 9;
+                            renderEasyPageComponent({ appEl });
                         }
                     }
                 }

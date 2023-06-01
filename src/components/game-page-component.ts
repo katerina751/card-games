@@ -1,12 +1,10 @@
-import { START_PAGE } from '../routes';
-import { goToPage } from '../script';
 import { desk } from './desk';
+import { n, renderStartPageComponent } from './start-page-component';
 
-
-export function renderHardPageComponent({ appEl }: { appEl: HTMLElement }) {
+export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
     let gameCards = desk
         .sort(() => Math.random() - 0.5)
-        .slice(-9)
+        .slice(-n)
         .join(' ')
         .concat(' ')
         .repeat(2)
@@ -18,8 +16,49 @@ export function renderHardPageComponent({ appEl }: { appEl: HTMLElement }) {
     let isCurrentWindow = false;
     let winnerUser = false;
 
-    // окно с открытыми рубашками через 5 секунд
-    function startGamePage () {
+    // окно с открытыми рубашками
+    function startGame() {
+        const cardHTML = gameCards
+            .map((card, index) => {
+                return `
+                    <img class="game__card_start" data-index=${index} src="./img/${card}.svg" alt="рубашка" />
+                    `;
+            })
+            .join('');
+
+        const windowHtml = `
+                <div class="game-header">
+                    <div class="game-header__timer">
+                        <div class="game-header__timer_header">
+                            <p class="game-header__timer_header-item">min</p>
+                            <p class="game-header__timer_header-item">sec</p>
+                        </div>
+                        <div class="game-header__timer_time" id="countdown">00:00</div>
+                    </div>
+                    <div class="game-header__restart">
+                        <button class="restart__button">Начать заново</button>
+                    </div>
+                </div>
+                <div class="game__field">
+                    ${cardHTML}
+                </div>
+                `;
+
+        appEl.innerHTML = windowHtml;
+
+        const restartGame = () => {
+            const buttonRestartGame =
+                document.querySelector('.restart__button');
+            buttonRestartGame!.addEventListener('click', () => {
+                return renderStartPageComponent({ appEl });
+            });
+        };
+
+        restartGame();
+    }
+
+    // окно с закрытыми рубашками через 5 секунд
+    function startGamePage() {
         const cardHTML = gameCards
             .map((card, index) => {
                 return `
@@ -87,7 +126,6 @@ export function renderHardPageComponent({ appEl }: { appEl: HTMLElement }) {
                     setTimeout(() => {
                         winnerUser = true;
                         isCurrentWindow = !isCurrentWindow;
-                        console.log(isCurrentWindow);
                         modalOverlay();
                         resetBoard();
                     }, 500);
@@ -197,10 +235,8 @@ export function renderHardPageComponent({ appEl }: { appEl: HTMLElement }) {
                 const restartGame = () => {
                     const buttonRestartGame =
                         document.querySelector('.game__button');
-                    console.log(buttonRestartGame);
-
                     buttonRestartGame!.addEventListener('click', () => {
-                        return goToPage(START_PAGE);
+                        return renderStartPageComponent({ appEl });
                     });
                 };
                 restartGame();
@@ -208,9 +244,8 @@ export function renderHardPageComponent({ appEl }: { appEl: HTMLElement }) {
                 const restartGame = () => {
                     const buttonRestartGame =
                         document.querySelector('.restart__button');
-                    console.log(buttonRestartGame);
                     buttonRestartGame!.addEventListener('click', () => {
-                        return goToPage(START_PAGE);
+                        return renderStartPageComponent({ appEl });
                     });
                 };
                 restartGame();
@@ -218,58 +253,15 @@ export function renderHardPageComponent({ appEl }: { appEl: HTMLElement }) {
         }
 
         restartGame();
-    };
+    }
 
     startGame();
     setTimeout(startGamePage, 5000);
 
-    // окно с закрытыми рубашками
-    function startGame() {
-        const cardHTML = gameCards
-            .map((card, index) => {
-                return `
-                <img class="game__card_start" data-index=${index} src="./img/${card}.svg" alt="рубашка" />
-                `;
-            })
-            .join('');
-
-        const windowHtml = `
-            <div class="game-header">
-                <div class="game-header__timer">
-                    <div class="game-header__timer_header">
-                        <p class="game-header__timer_header-item">min</p>
-                        <p class="game-header__timer_header-item">sec</p>
-                    </div>
-                    <div class="game-header__timer_time" id="countdown">00:00</div>
-                </div>
-                <div class="game-header__restart">
-                    <button class="restart__button">Начать заново</button>
-                </div>
-            </div>
-            <div class="game__field">
-                ${cardHTML}
-            </div>
-            `;
-
-        appEl.innerHTML = windowHtml;
-
-        const restartGame = () => {
-            const buttonRestartGame =
-                document.querySelector('.restart__button');
-            console.log(buttonRestartGame);
-            buttonRestartGame!.addEventListener('click', () => {
-                return goToPage(START_PAGE);
-            });
-        };
-
-        restartGame();
-    }
-
     const restartGame = () => {
         const buttonRestartGame = document.querySelector('.restart__button');
-        console.log(buttonRestartGame);
         buttonRestartGame!.addEventListener('click', () => {
-            return goToPage(START_PAGE);
+            return renderStartPageComponent({ appEl });
         });
     };
 }
