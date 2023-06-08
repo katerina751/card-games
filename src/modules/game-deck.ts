@@ -1,4 +1,4 @@
-export const desk = [
+export const deck = [
     '6spades',
     '7spades',
     '8spades',
@@ -36,5 +36,3 @@ export const desk = [
     'Kdiamonds',
     'Adiamonds',
 ];
-
-

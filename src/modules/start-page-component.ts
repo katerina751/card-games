@@ -1,4 +1,4 @@
-import { renderEasyPageComponent } from './game-page-component';
+import { renderGamePageComponent as renderGamePageComponent } from './game-page-component';
 export let n: number;
 
 export function renderStartPageComponent({ appEl }: { appEl: HTMLElement }) {
@@ -41,13 +41,13 @@ export function renderStartPageComponent({ appEl }: { appEl: HTMLElement }) {
                         console.log('Выбран ' + Number(i + 1) + ' уровень');
                         if (i === 0) {
                             n = 3;
-                            renderEasyPageComponent({ appEl });
+                            renderGamePageComponent({ appEl });
                         } else if (i === 1) {
                             n = 6;
-                            renderEasyPageComponent({ appEl });
+                            renderGamePageComponent({ appEl });
                         } else if (i === 2) {
                             n = 9;
-                            renderEasyPageComponent({ appEl });
+                            renderGamePageComponent({ appEl });
                         }
                     }
                 }
