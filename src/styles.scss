@@ -5,7 +5,7 @@
 }
 
 @font-face {
-    font-family: 'StratosSkyeng';
+    font-family: StratosSkyeng, sans-serif;
     font-style: normal;
     font-weight: 400;
     font-display: swap;
@@ -13,7 +13,7 @@
 }
 
 body {
-    font-family: 'StratosSkyeng';
+    font-family: StratosSkyeng, sans-serif;
     font-style: normal;
     background: #004980;
     max-width: 1024px;
@@ -82,14 +82,14 @@ body {
     color: #0080c1;
 }
 
-/* Checked */
-.window__level input[type='radio']:checked + label {
-    background: #efefef;
+/* Hover */
+.window__level label:hover {
     color: #004980;
 }
 
-/* Hover */
-.window__level label:hover {
+/* Checked */
+.window__level input[type='radio']:checked + label {
+    background: #efefef;
     color: #004980;
 }
 
@@ -101,7 +101,6 @@ body {
     border-radius: 12px;
     border: 0;
 
-    font-family: 'StratosSkyeng';
     font-style: normal;
     font-weight: 400;
     font-size: 24px;
