@@ -1,5 +1,5 @@
-import { renderEasyPageComponent } from './components/game-page-component';
-import { renderStartPageComponent } from './components/start-page-component';
+import { renderGamePageComponent } from './modules/game-page-component';
+import { renderStartPageComponent } from './modules/start-page-component';
 import {
     START_PAGE, //начальная страница
     GAME_PAGE, //игра
@@ -37,7 +37,7 @@ const renderApp = () => {
     }
 
     if (page === GAME_PAGE) {
-        return renderEasyPageComponent({
+        return renderGamePageComponent({
             appEl,
         });
     }

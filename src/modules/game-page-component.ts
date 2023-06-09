@@ -1,8 +1,9 @@
-import { desk } from './desk';
+import GameDeck from './deck';
+import { deck } from './game-deck';
 import { n, renderStartPageComponent } from './start-page-component';
 
-export function renderEasyPageComponent({ appEl }: { appEl: HTMLElement }) {
-    let gameCards = desk
+export function renderGamePageComponent({ appEl }: { appEl: HTMLElement }) {
+    let gameCards = GameDeck({ deck })
         .sort(() => Math.random() - 0.5)
         .slice(-n)
         .join(' ')
